@@ -1,3 +1,41 @@
 #post {
 	display: none;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#timer {
+	font-size: 30vw;
+	flex-basis: 100%;
+	text-align: center;
+}
+
+button {
+	width: 100%;
+	font-size: 5vw;
+}
+
+html {
+	background-color: 222222;
+	font-family: monospace;
+	color: dddddd;
+	font-size: 6vw;
+	display: flex;
+	justify-content: center;
+}
+
+.textInput {
+	width: 4ch;
+	font-size: 4vw;
+}
+
+.checkable {
+	font-size: 2vw;
+	display: inline-block;
+}
+
+.checkablebox {
+	height: 1vw;
+	width: 1vw;
+	transform: scale(2);
 }

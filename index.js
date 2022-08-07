@@ -8,13 +8,13 @@ function antiToAd() {
 		loFlexes.push(checkboxes[i].value)
 	}
 	anti.style.display="none";
-	post.style.display="block";
+	post.style.display="flex";
 	nextBreak();
 }
 
 function postToAnti() {
 	post.style.display="none";
-	anti.style.display="block";
+	anti.style.display="flex";
 }
 
 function nextBreak() {
@@ -22,6 +22,7 @@ function nextBreak() {
 	timer.innerHTML = offTime.value;
 	upcomingFlex = loFlexes[Math.floor(Math.random() * loFlexes.length)];
 	content.innerHTML = "Next Up: " + upcomingFlex;
+	document.documentElement.style.backgroundColor = "#222233";
 	const interval = setInterval(function() {
 		setSeconds = setSeconds + 1;
 		totalSeconds = totalSeconds + 1;
@@ -43,6 +44,7 @@ function nextFlex() {
 	let setSeconds = 0;
 	timer.innerHTML = onTime.value;
 	content.innerHTML = upcomingFlex;
+	document.documentElement.style.backgroundColor = "#332222";
 	const interval = setInterval(function() {
 		setSeconds = setSeconds + 1;
 		totalSeconds = totalSeconds + 1;
