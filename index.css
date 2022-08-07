@@ -8,6 +8,7 @@
 	font-size: 30vw;
 	flex-basis: 100%;
 	text-align: center;
+	font-family:'digital-clock-font';
 }
 
 button {
@@ -38,4 +39,9 @@ html {
 	height: 1vw;
 	width: 1vw;
 	transform: scale(2);
+}
+
+@font-face{
+	font-family:'digital-clock-font';
+	src: url('digital-7 (mono).ttf');
 }
