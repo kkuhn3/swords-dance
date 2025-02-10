@@ -15,6 +15,7 @@ function antiToAd() {
 		alert("Please select at least one checkbox.");
 		return;
 	}
+	totalSeconds = 0;
 	anti.style.display="none";
 	post.style.display="flex";
 	nextBreak();
