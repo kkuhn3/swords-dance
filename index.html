@@ -14,7 +14,7 @@
 			<label for="offTime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Off(s):</label>
 			<input type="text" class="textInput" id="offTime" value="30"><br>
 			<span>Includes:</span><br>
-			<div class=checkable>
+			<div id="checkables" class=checkable>
 				<div class=col>
 					<input class="checkablebox" type="checkbox" checked=true id="pushUpCheck" value="Push Ups">
 					<label for="pushUpCheck"> Push Ups</label><br>
@@ -39,7 +39,11 @@
 					<input class="checkablebox" type="checkbox" checked=true id="SkullsCheck" value="Sculls">
 					<label for="ScullsCheck"> Sculls</label><br>
 				</div>
-			</div>
+			</div><br>
+			<span>Input new Flex: </span>
+			<input type="textarea" id="newFlex" onkeydown="if (event.keyCode == 13) { addFlex(newFlex.value) }">
+			<input type="button" id="newFlexButton" value="Add" onclick="addFlex(newFlex.value)"/>
+
 		</div>
 		<div id="post">
 			<span id="timer">30</span>

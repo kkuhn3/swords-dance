@@ -2,8 +2,26 @@ let loFlexes = [];
 let rotatingloFlexes = [];
 let totalSeconds = 0;
 let upcomingFlex = "";
-let startAudio = new Audio("DDStart.mp3");
-let endAudio = new Audio("RSEVictory.mp3");
+
+function addFlex(flexName) {
+	if (newFlex.value) {
+		let sanatizedName = newFlex.value.replace(/[^a-zA-Z0-9 ]+/g, "").substring(0, 11);
+		let spaceless = sanatizedName.replace(" ", "");
+		if (sanatizedName && spaceless) {
+			let newDiv = `
+				<div class=col>
+					<input class="checkablebox" type="checkbox" checked=true id="` + sanatizedName + `" + value="` + sanatizedName + `">
+					<label for="` + sanatizedName + `"> ` + sanatizedName + `</label><br>
+				</div>
+			`;
+			checkables.innerHTML += newDiv;
+			newFlex.value = "";
+		}
+		else {
+			alert("" + newFlex.value + " is not valid, please enter atleast one alphanumeric character.")
+		}
+	}
+}
 
 function antiToAd() {
 	const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
@@ -49,10 +67,6 @@ function nextBreak() {
 		totalSeconds = totalSeconds + 1;
 
 		timer.innerHTML = offTime.value - setSeconds;
-		if(timer.innerHTML == 4) {
-			startAudio.play();
-		}
-
 		if(setSeconds >= offTime.value) {
 			clearInterval(interval);
 			nextFlex();
@@ -74,10 +88,6 @@ function nextFlex() {
 		totalSeconds = totalSeconds + 1;
 		
 		timer.innerHTML = onTime.value - setSeconds;
-		if(timer.innerHTML == 1) {
-			endAudio.play();
-		}
-
 		if(setSeconds >= onTime.value) {
 			clearInterval(interval);
 			nextBreak();
