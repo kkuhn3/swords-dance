@@ -45,12 +45,16 @@ function postToAnti() {
 	document.documentElement.style.backgroundColor = "#222222";
 }
 
+let interval = null;
+let onBreak = true;
+let setSeconds = 0;
 function nextBreak() {
 	if(totalTime.value * 60 - totalSeconds <= offTime.value) {
 		postToAnti();
 		return;
 	}
 	
+	onBreak = true;
 	let flexIndex = Math.floor(Math.random() * rotatingloFlexes.length);
 	upcomingFlex = rotatingloFlexes[flexIndex];
 	rotatingloFlexes.splice(flexIndex, 1);
@@ -58,43 +62,57 @@ function nextBreak() {
 		rotatingloFlexes = [...loFlexes];
 	}
 
-	let setSeconds = 0;
+	setSeconds = 0;
 	timer.innerHTML = offTime.value;
 	content.innerHTML = "Next Up: " + upcomingFlex;
 	document.documentElement.style.backgroundColor = "#222233";
-	const interval = setInterval(function() {
-		setSeconds = setSeconds + 1;
-		totalSeconds = totalSeconds + 1;
-
-		timer.innerHTML = offTime.value - setSeconds;
-		if(setSeconds >= offTime.value) {
-			clearInterval(interval);
-			nextFlex();
-		}
-		else if(totalSeconds >= totalTime.value * 60) {
-			clearInterval(interval);
-			postToAnti();
-		}
+	interval = setInterval(function() {
+		newInterval(nextFlex, offTime);
 	}, 1000);
 }
 
 function nextFlex() {
-	let setSeconds = 0;
+	onBreak = false;
+	setSeconds = 0;
 	timer.innerHTML = onTime.value;
 	content.innerHTML = upcomingFlex;
 	document.documentElement.style.backgroundColor = "#332222";
-	const interval = setInterval(function() {
-		setSeconds = setSeconds + 1;
-		totalSeconds = totalSeconds + 1;
-		
-		timer.innerHTML = onTime.value - setSeconds;
-		if(setSeconds >= onTime.value) {
-			clearInterval(interval);
-			nextBreak();
-		}
-		else if(totalSeconds >= totalTime.value * 60) {
-			clearInterval(interval);
-			postToAnti();
-		}
+	interval = setInterval(function() {
+		newInterval(nextBreak, onTime);
 	}, 1000);
+}
+
+function newInterval(callback, timeDiv) {
+	setSeconds = setSeconds + 1;
+	totalSeconds = totalSeconds + 1;
+	
+	timer.innerHTML = timeDiv.value - setSeconds;
+	if(setSeconds >= timeDiv.value) {
+		clearInterval(interval);
+		callback();
+	}
+	else if(totalSeconds >= totalTime.value * 60) {
+		clearInterval(interval);
+		postToAnti();
+	}
+}
+
+let paused = false;
+function pause() {
+	if (!paused) {
+		clearInterval(interval);
+		paused = true;
+	}
+	else if (onBreak) {
+		paused = false;
+		interval = setInterval(function() {
+			newInterval(nextFlex, offTime);
+		}, 1000);
+	}
+	else {
+		paused = false;
+		interval = setInterval(function() {
+			newInterval(nextBreak, onTime);
+		}, 1000);
+	}
 }
