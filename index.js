@@ -33,13 +33,14 @@ function antiToAd() {
 		alert("Please select at least one checkbox.");
 		return;
 	}
-	totalSeconds = 0;
 	anti.style.display="none";
 	post.style.display="flex";
 	nextBreak();
 }
 
 function postToAnti() {
+	loFlexes = [];
+	totalSeconds = 0;
 	post.style.display="none";
 	anti.style.display="block";
 	document.documentElement.style.backgroundColor = "#222222";
