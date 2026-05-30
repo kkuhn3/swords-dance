@@ -2,6 +2,7 @@ let loFlexes = [];
 let rotatingloFlexes = [];
 let totalSeconds = 0;
 let upcomingFlex = "";
+let size = 2;
 
 function addFlex(flexName) {
 	if (newFlex.value) {
@@ -35,6 +36,7 @@ function antiToAd() {
 	}
 	anti.style.display="none";
 	post.style.display="flex";
+	size = getSize(offTime.value, onTime.value);
 	nextBreak();
 }
 
@@ -64,7 +66,7 @@ function nextBreak() {
 	}
 
 	setSeconds = 0;
-	timer.innerHTML = offTime.value;
+	timer.innerHTML = stringFromInt(offTime.value);
 	content.innerHTML = "Next Up: " + upcomingFlex;
 	document.documentElement.style.backgroundColor = "#222233";
 	interval = setInterval(function() {
@@ -75,7 +77,7 @@ function nextBreak() {
 function nextFlex() {
 	onBreak = false;
 	setSeconds = 0;
-	timer.innerHTML = onTime.value;
+	timer.innerHTML = stringFromInt(onTime.value);
 	content.innerHTML = upcomingFlex;
 	document.documentElement.style.backgroundColor = "#332222";
 	interval = setInterval(function() {
@@ -87,7 +89,7 @@ function newInterval(callback, timeDiv) {
 	setSeconds = setSeconds + 1;
 	totalSeconds = totalSeconds + 1;
 	
-	timer.innerHTML = timeDiv.value - setSeconds;
+	timer.innerHTML = stringFromInt(timeDiv.value - setSeconds);
 	if(setSeconds >= timeDiv.value) {
 		clearInterval(interval);
 		callback();
@@ -116,4 +118,15 @@ function pause() {
 			newInterval(nextBreak, onTime);
 		}, 1000);
 	}
+}
+
+function stringFromInt(integer) {
+	return String(integer).padStart(size, '0')
+}
+
+function getSize(integer1, integer2) {
+	if (integer1 > integer2) {
+		return String(integer1).length;
+	}
+	return String(integer2).length;
 }

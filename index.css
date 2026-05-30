@@ -12,6 +12,11 @@
 	user-select: none;
 }
 
+#content {
+	margin-top: 30vw;
+	position: absolute;
+}
+
 button {
 	width: 100%;
 	font-size: 5vw;
